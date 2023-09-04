@@ -22,6 +22,7 @@ payoff_worth=np.array([.15,.3,.55]) #[Laws payoff, Reserve payoff, Community pay
 Laws_payoff=np.array([0.55*payoff_worth[0]*PAYOFF_BANK\
     ,0.2*payoff_worth[0]*PAYOFF_BANK\
         ,0.25*payoff_worth[0]*PAYOFF_BANK])
+print(Laws_payoff)
 
 Reserves_payoff=np.array([0.3*payoff_worth[1]*PAYOFF_BANK\
     ,0.5*payoff_worth[1]*PAYOFF_BANK\
@@ -30,6 +31,14 @@ Reserves_payoff=np.array([0.3*payoff_worth[1]*PAYOFF_BANK\
 Community_payoff=np.array([0.3*payoff_worth[2]*PAYOFF_BANK\
     ,0.1*payoff_worth[2]*PAYOFF_BANK\
         ,0.6*payoff_worth[2]*PAYOFF_BANK])
+    
+Payoff_matrix=np.zeros((3,3))
+for i in range(3):
+    Payoff_matrix[i][0]=Laws_payoff[i]
+    Payoff_matrix[i][1]=Reserves_payoff[i]
+    Payoff_matrix[i][2]=Community_payoff[i]
+print("Payoff_Matrix")
+print(Payoff_matrix)
 
 
 ######################## Playing the Game!  ########################
