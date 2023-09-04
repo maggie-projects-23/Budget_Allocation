@@ -10,6 +10,9 @@ def Strategy(budget, payoff_matrix, Payoff_Bank):
                           #### People       [                               ]
     r=random.randint(0,100)
     
+    print("The payoff matrix is")
+    print(payoff_matrix)
+    
     
     #Gives percentage (in decimal form) of how much the Laws, Reserves, and Community bettlefield contribute
     percent_contribution_cat=np.array(np.sum(payoff_matrix, axis=1)/Payoff_Bank)
@@ -41,6 +44,10 @@ def Strategy(budget, payoff_matrix, Payoff_Bank):
         third_max_community=community_list[0]
         return(sec_max_laws, sec_max_reserves, sec_max_community\
                ,third_max_laws, third_max_reserves, third_max_community)
+            
+    (max_laws, max_reserves, max_community) = Largest(Payoff_Bank)
+    (sec_max_laws, sec_max_reserves, sec_max_community\
+           ,third_max_laws, third_max_reserves, third_max_community) = Second_and_Third_Largest(Payoff_Bank)        
         
     
     # =============================================================================
@@ -59,14 +66,12 @@ def Strategy(budget, payoff_matrix, Payoff_Bank):
     # =============================================================================
     # =============================================================================
     ##### Strategy 2 #####
-    ## llocate all resources of a particular type to the sub-battlefield that contributes the post
+    ## allocate all resources of a particular type to the sub-battlefield that contributes the post
     ## payoff for that battlefield. If the same sub-battlefield type contributes the most in two different
     ## battlefields, then the resources are split according to how much one battlefield contributes that then other 
+    ## If the max sub-battlefield had the same payoff as another sub-battlefield in the same battlefield then this 
+    ## strategy cannot be used
     if r>10 and r<=20:
-        
-        (max_laws, max_reserves, max_community) = Largest(Payoff_Bank)
-        
-        print("The payoff matrix is", payoff_matrix)
      
         for i in range(3):
             if max_laws==payoff_matrix[i][0]:
@@ -132,6 +137,16 @@ def Strategy(budget, payoff_matrix, Payoff_Bank):
                     strat[i][j]= percent_contribution_cat[j]*budget[i] #amount of resources that go to laws
                     strat[i][j]=percent_contribution_cat[j]*budget[i] #amount of resources that go to reserves
                     strat[i][j]=percent_contribution_cat[j]*budget[i] # amount of resources that go to community
+                    
+        
+        ### What to do if max and second max are the same
+        if max_laws==sec_max_laws:
+            print("Yikes:Two sub-battlefields in Laws contain highest amount")
+        if max_reserves==sec_max_reserves:
+            print("Yikes:Two sub-battlefields in Reserves contain highest amount")
+        if max_community==sec_max_community:
+            print("Yikes:Two sub-battlefields in Community contain highest amount")
+                    
 
         print("Strategy 2 was played") 
     # =============================================================================
@@ -142,11 +157,7 @@ def Strategy(budget, payoff_matrix, Payoff_Bank):
     # =============================================================================   
     ##### Strategy 3 #####
     ## Distribute all respectuve resources evenly across all corresponding sub-battlefields
-    if r>0 and r<=100:
-        (max_laws, max_reserves, max_community) = Largest(Payoff_Bank)
-        (sec_max_laws, sec_max_reserves, sec_max_community\
-               ,third_max_laws, third_max_reserves, third_max_community) = Second_and_Third_Largest(Payoff_Bank)
-                
+    if r>0 and r<=100:         
         for i in range(3):
             if sec_max_laws==payoff_matrix[i][0]:
                 sec_max_laws_pos=i
@@ -648,7 +659,7 @@ def Strategy(budget, payoff_matrix, Payoff_Bank):
                                 strat[i][j]=percent_contribution_cat[j]*budget[i] # amount of resources that community
     
         if max_laws==sec_max_laws or max_reserves==sec_max_reserves or max_community==sec_max_community:
-            print("Cannot do strategy")
+           print("Cannot do strategy")
                 
         
         print("Strategy 3 was played") 
@@ -662,7 +673,7 @@ def Strategy(budget, payoff_matrix, Payoff_Bank):
         
 
         
-Strategy([10,9,21],np.array([[3,9,33],[3,15,5.5], [9, 6, 16.5]]), 100)
+Strategy([10,9,21],np.array([[3,9,22],[3,15,16.5], [9, 6, 16.5]]), 100)
 
 
 
