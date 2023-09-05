@@ -3,6 +3,7 @@ import random
 from strategy_2 import Strategy_2
 from strategy_3 import Strategy_3
 from strategy_4 import Strategy_4
+from strategy_5 import Strategy_5
 
 
 
@@ -14,21 +15,22 @@ def Strategy(budget, payoff_matrix, Payoff_Bank):
                           #### Monetary     [                               ]
                           #### Non-Monetary [                               ]
                           #### People       [                               ]
-    r=random.randint(0,100)
+    r=#random.randint(0,100)
     
     print("The payoff matrix is")
     print(payoff_matrix)
     
     
     #Gives percentage (in decimal form) of how much the Laws, Reserves, and Community bettlefield contribute
-    percent_contribution_cat=np.array(np.sum(payoff_matrix, axis=1)/Payoff_Bank)
+    percent_contribution_cat=np.array(np.sum(payoff_matrix, axis=0)/Payoff_Bank)
+
     
     
     # =============================================================================
     # =============================================================================   
     ##### Strategy 1 #####
     ## Distribute all respectuve resources evenly across all corresponding sub-battlefields
-    if r>0 and r<=10:
+    if r>0 and r<=11:
         for j in range(3):
             for i in range(3):
                 strat[j][i]=budget[j]/3
@@ -48,7 +50,10 @@ def Strategy(budget, payoff_matrix, Payoff_Bank):
     ## If all three battlefields share the max sub-battlefields, then the resources are distributed accouding
     ## to the contribution each battlefield makes
     
-    Strategy_2(r,Payoff_Bank, payoff_matrix, budget, strat, percent_contribution_cat)
+    ## Distribute all respectuve resources evenly across all corresponding sub-battlefields
+    
+    if r>11 and r<=22:
+        Strategy_2(r,Payoff_Bank, payoff_matrix, budget, strat, percent_contribution_cat)
  
     # =============================================================================
     # =============================================================================
@@ -72,7 +77,10 @@ def Strategy(budget, payoff_matrix, Payoff_Bank):
     ## cannot be used
     ## If all three battlefields share second(third) sub-battlefields, then the resources are distributed accouding
     ## to the contribution each battlefield makes
-    Strategy_3(r,Payoff_Bank, payoff_matrix, budget, strat, percent_contribution_cat)
+   
+    if r>22 and r<=33: 
+        Strategy_3(r,Payoff_Bank, payoff_matrix, budget, strat, percent_contribution_cat)
+        
     # =============================================================================
     # =============================================================================
         
@@ -92,9 +100,34 @@ def Strategy(budget, payoff_matrix, Payoff_Bank):
     ## If two battlefields have identical second and third most contributing subbattlefields, then this strategy 
     ## cannot be used. If the most contributing subbattlefield and the second are identical, then this stragegy 
     ## cannot be used
-    Strategy_4(r,Payoff_Bank, payoff_matrix, budget, strat, percent_contribution_cat)
+    
+    if r>33 and r<=44: 
+        Strategy_4(r,Payoff_Bank, payoff_matrix, budget, strat, percent_contribution_cat)
     # =============================================================================
     # =============================================================================
+    
+    
+    # =============================================================================
+    # =============================================================================   
+    ##### Strategy 5 #####
+    ## If the payoff of the battlefield with the most contribution is greater than the sum of the con-
+    ## tributions from the two remaining battlefields, then allocate all resources of all types to the
+    ## battlefield that contributes the most.
+    ##
+    ## If the payoff of the battlefield with the most contribution is less than the sum of the contri-
+    ## butions from the two remaining battlefields, then split all resources proportionally (same as
+    ## in 1.) of all types to the two battlefields that do not contribute the most
+    ##
+    ## Cannot do strategy if two battlefields share the same max contribution value
+    ##
+    ## If all battefields have equal weight, distribute evenly.
+    
+    if r>44 and r<=55: 
+        Strategy_5(r,Payoff_Bank, payoff_matrix, budget, strat, percent_contribution_cat)
+    # =============================================================================
+    # =============================================================================
+    
+
     
     print(r)            
     print("The strategy matrix is")
