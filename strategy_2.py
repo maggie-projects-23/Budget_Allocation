@@ -95,4 +95,6 @@ def Strategy_2(r,Payoff_Bank, payoff_matrix, budget, strat, percent_contribution
         
 
         print("Strategy 2 was played") 
+        return(strat)
+    
   

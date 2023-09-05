@@ -17,14 +17,16 @@ def Strategy_3(r,Payoff_Bank, payoff_matrix, budget, strat, percent_contribution
         
     
     ##### Strategy 3 #####
-    ## Distribute all respectuve resources evenly across all corresponding sub-battlefields
-    if r>0 and r<=1:  
+
+    if r>20and r<=30:  
         if sec_max_laws==third_max_laws and sec_max_reserves==third_max_reserves:
-            print("More than one battlefield has identical second and third sub-battlefield payoffs")
+            print("Error: More than one battlefield has identical second and third sub-battlefield payoffs")
         elif sec_max_laws==third_max_laws and sec_max_community==third_max_community:
-            print("More than one battlefield has identical second and third sub-battlefield payoffs")
+            print("Error: More than one battlefield has identical second and third sub-battlefield payoffs")
         elif sec_max_reserves==third_max_reserves and sec_max_community==third_max_community:
-            print("More than one battlefield has identical second and third sub-battlefield payoffs")
+            print("Error: More than one battlefield has identical second and third sub-battlefield payoffs")
+        elif sec_max_laws==max_laws or sec_max_reserves==max_reserves or sec_max_community==max_community:
+             print("Error: Second sub-battlefield has same contribution as max sub-battlefield")
         else:
             for i in range(3):
                 if sec_max_laws==payoff_matrix[i][0]:
@@ -106,7 +108,7 @@ def Strategy_3(r,Payoff_Bank, payoff_matrix, budget, strat, percent_contribution
                             
                            
                     if third_max_laws_pos==third_max_community_pos:
-                        share_pos=sec_max_laws_pos
+                        share_pos=third_max_laws_pos
                         ratio=percent_contribution_cat[0]/percent_contribution_cat[2]
                         
                         community_strategy=budget[share_pos]/(1+ratio)
@@ -128,7 +130,7 @@ def Strategy_3(r,Payoff_Bank, payoff_matrix, budget, strat, percent_contribution
                         strat[share_pos][0]=ratio * reserves_strategy #amount of resources that go to laws
                 
                     if third_max_reserves_pos==third_max_community_pos:
-                        share_pos=sec_max_reserves_pos
+                        share_pos=third_max_reserves_pos
                         ratio=percent_contribution_cat[1]/percent_contribution_cat[2]
                         
                         community_strategy=budget[share_pos]/(1+ratio)
@@ -141,7 +143,7 @@ def Strategy_3(r,Payoff_Bank, payoff_matrix, budget, strat, percent_contribution
                 if third_max_community_pos != sec_max_laws_pos and third_max_community_pos != sec_max_reserves_pos:
                     
                     if third_max_laws_pos==third_max_community_pos:
-                        share_pos=sec_max_laws_pos
+                        share_pos=third_max_laws_pos
                         ratio=percent_contribution_cat[0]/percent_contribution_cat[2]
                         
                         community_strategy=budget[share_pos]/(1+ratio)
@@ -149,7 +151,7 @@ def Strategy_3(r,Payoff_Bank, payoff_matrix, budget, strat, percent_contribution
                         strat[share_pos][0]=ratio * community_strategy #amount of resources that go to laws
                 
                     if third_max_reserves_pos==third_max_community_pos:
-                        share_pos=sec_max_reserves_pos
+                        share_pos=third_max_reserves_pos
                         ratio=percent_contribution_cat[1]/percent_contribution_cat[2]
                         
                         community_strategy=budget[share_pos]/(1+ratio)
@@ -526,7 +528,7 @@ def Strategy_3(r,Payoff_Bank, payoff_matrix, budget, strat, percent_contribution
                                     strat[i][j]= percent_contribution_cat[j]*budget[i] #amount of resources that go to laws
                                     strat[i][j]=percent_contribution_cat[j]*budget[i] #amount of resources that go to reserves
                                     strat[i][j]=percent_contribution_cat[j]*budget[i] # amount of resources that community
+            print("Strategy 3 was played") 
             return(strat)
-        print("Strategy 3 was played") 
             
     
