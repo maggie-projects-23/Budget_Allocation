@@ -4,6 +4,7 @@ from strategy_2 import Strategy_2
 from strategy_3 import Strategy_3
 from strategy_4 import Strategy_4
 from strategy_5 import Strategy_5
+from strategy_6 import Strategy_6
 
 
 
@@ -15,7 +16,7 @@ def Strategy(budget, payoff_matrix, Payoff_Bank):
                           #### Monetary     [                               ]
                           #### Non-Monetary [                               ]
                           #### People       [                               ]
-    r=#random.randint(0,100)
+    r=60#random.randint(0,100)
     
     print("The payoff matrix is")
     print(payoff_matrix)
@@ -127,7 +128,19 @@ def Strategy(budget, payoff_matrix, Payoff_Bank):
     # =============================================================================
     # =============================================================================
     
-
+    
+    # =============================================================================
+    # =============================================================================   
+    ######Strategy 6
+    ## Distribute resources accordingly to how much contribution the battlefield holds• 
+    ## If Laws hold 15%, Reserves 30%, and Community 55%, then 15% of the Monetary, Non-
+    ## Monetary, and People budgets would go to Laws, 30% of the Monetary, Non-Monetary,
+    ## and People budgets would go to Reserves, etc
+    
+    if r>55 and r<=66: 
+        Strategy_6(r,Payoff_Bank, payoff_matrix, budget, strat, percent_contribution_cat)
+    # =============================================================================
+    # =============================================================================
     
     print(r)            
     print("The strategy matrix is")
