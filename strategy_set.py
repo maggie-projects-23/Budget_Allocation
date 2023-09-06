@@ -4,7 +4,8 @@ from strategy_2 import Strategy_2
 from strategy_3 import Strategy_3
 from strategy_4 import Strategy_4
 from strategy_5 import Strategy_5
-from strategy_6 import Strategy_6
+from strategy_8 import Strategy_8
+from strategy_9 import Strategy_9
 
 
 
@@ -16,15 +17,11 @@ def Strategy(budget, payoff_matrix, Payoff_Bank):
                           #### Monetary     [                               ]
                           #### Non-Monetary [                               ]
                           #### People       [                               ]
-    r=60#random.randint(0,100)
-    
-    print("The payoff matrix is")
-    print(payoff_matrix)
+    r=random.randint(0,99)
     
     
     #Gives percentage (in decimal form) of how much the Laws, Reserves, and Community bettlefield contribute
     percent_contribution_cat=np.array(np.sum(payoff_matrix, axis=0)/Payoff_Bank)
-
     
     
     # =============================================================================
@@ -138,18 +135,61 @@ def Strategy(budget, payoff_matrix, Payoff_Bank):
     ## and People budgets would go to Reserves, etc
     
     if r>55 and r<=66: 
-        Strategy_6(r,Payoff_Bank, payoff_matrix, budget, strat, percent_contribution_cat)
+        for i in range(3):
+            for j in range (3):
+                strat[i][j]=percent_contribution_cat[j]*budget[i]
+                
+        print("Strategy 6 was played")
     # =============================================================================
     # =============================================================================
     
-    print(r)            
-    print("The strategy matrix is")
-    print(strat)
+    
+    # =============================================================================
+    # =============================================================================   
+    ######Strategy 7
+    ## Always allocate all resources to the Community because it drives the game
+    
+    if r>66 and r<=77: 
+        for i in range(3):
+            strat[i][2]=budget[i]
+                
+        print("Strategy 7 was played")
+    # =============================================================================
+    # =============================================================================
+    
+    
+    # =============================================================================
+    # =============================================================================   
+    ######Strategy 8
+    ## Allocate resources proportionally to the the top two contributing battlefields.
+    ## If the second and third contributing battlefields have the same contribution, then 
+    ## randomly choose one to be labeled as the second.
+    
+    if r>77 and r<=88: 
+        Strategy_8(r,Payoff_Bank, payoff_matrix, budget, strat, percent_contribution_cat)
+    # =============================================================================
+    # =============================================================================
+    
+    
+    # =============================================================================
+    # =============================================================================   
+    ######Strategy 9
+    ## Allocate resources proportionally to the the top two contributing battlefields.
+    ## If the second and third contributing battlefields have the same contribution, then 
+    ## randomly choose one to be labeled as the second.
+    
+    if r>88 and r<=99: 
+        Strategy_9(r,Payoff_Bank, payoff_matrix, budget, strat, percent_contribution_cat)
+    # =============================================================================
+    # =============================================================================
+    
+    
+    
+    # print(r)            
+    # print("The strategy matrix is")
+    # print(strat)
+    return(strat)
         
-        
-
-        
-Strategy([10,9,21],np.array([[8.25, 9, 16.5 ],[3, 15, 5.5],[3.75, 6, 33]]), 100)
 
 
 

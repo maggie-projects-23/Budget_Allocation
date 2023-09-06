@@ -1,5 +1,6 @@
 import numpy as np
 import random
+from strategy_set import Strategy
 
 ####### Initialize player's budgets and  #######
 POPULATION=100 #total people in the community/area of interest
@@ -22,7 +23,6 @@ payoff_worth=np.array([.15,.3,.55]) #[Laws payoff, Reserve payoff, Community pay
 Laws_payoff=np.array([0.55*payoff_worth[0]*PAYOFF_BANK\
     ,0.2*payoff_worth[0]*PAYOFF_BANK\
         ,0.25*payoff_worth[0]*PAYOFF_BANK])
-print(Laws_payoff)
 
 Reserves_payoff=np.array([0.3*payoff_worth[1]*PAYOFF_BANK\
     ,0.5*payoff_worth[1]*PAYOFF_BANK\
@@ -37,6 +37,7 @@ for i in range(3):
     Payoff_matrix[i][0]=Laws_payoff[i]
     Payoff_matrix[i][1]=Reserves_payoff[i]
     Payoff_matrix[i][2]=Community_payoff[i]
+
 print("Payoff_Matrix")
 print(Payoff_matrix)
 
@@ -46,23 +47,31 @@ game_number=1
 
 while C[2]>0 and P[2]>0:
     ####### Players distribute resources #######
-            #Columns are the following: Monetary, Non-Monetary, People. Rows are Player 1 and Player 2
-    LAWS=np.array([[random.randint(0,C[0]), random.randint(0,P[0])]\
-        ,[random.randint(0,C[1]), random.randint(0,P[1])]\
-        ,[random.randint(0,C[2]), random.randint(0,P[2])] ])
-    RESERVES=np.array([[random.randint(0,C[0]-LAWS[0][0]), random.randint(0,P[0]-LAWS[0][1])]\
-        ,[random.randint(0,C[1]-LAWS[1][0]), random.randint(0,P[1]-LAWS[1][1])]\
-        ,[random.randint(0,C[2]-LAWS[2][0]), random.randint(0,P[2]-LAWS[2][1])] ])
-    COMMUNITY=np.array([[C[0]-LAWS[0][0]-RESERVES[0][0], P[0]-LAWS[0][1]-RESERVES[0][1]]\
-        ,[C[1]-LAWS[1][0]-RESERVES[1][0], P[1]-LAWS[1][1]-RESERVES[1][1]]\
-        ,[C[2]-LAWS[2][0]-RESERVES[2][0], P[2]-LAWS[2][1]-RESERVES[2][1]] ])
+    
+    C_strat=Strategy(C,Payoff_matrix, PAYOFF_BANK)
+    print("The Convervationalists strategy is")
+    print(C_strat)
+    P_strat=Strategy(P,Payoff_matrix, PAYOFF_BANK)
+    print("The Poachers strategy is")
+    print(P_strat)
+            #Rows are the following: Monetary, Non-Monetary, People. Columns are Player 1 and Player 2
+    
+    LAWS=np.array([[C_strat[0][0], P_strat[0][0]]\
+        ,[C_strat[1][0], P_strat[1][0]]\
+        ,[C_strat[2][0], P_strat[2][0]]])
+    RESERVES=np.array([[C_strat[0][1], P_strat[0][1]]\
+        ,[C_strat[1][1], P_strat[1][1]]\
+        ,[C_strat[2][1], P_strat[2][1]]])
+    COMMUNITY=np.array([[C_strat[0][2], P_strat[0][2]]\
+        ,[C_strat[1][2], P_strat[1][2]]\
+        ,[C_strat[2][2], P_strat[2][2]]])
 
-    print("Laws Battlefield:")
-    print(LAWS)
-    print("Reserves Battlefield:")
-    print(RESERVES)
-    print("Community Battlefield:")
-    print(COMMUNITY)
+    # print("Laws Battlefield:")
+    # print(LAWS)
+    # print("Reserves Battlefield:")
+    # print(RESERVES)
+    # print("Community Battlefield:")
+    # print(COMMUNITY)
 
     ####### See who won each sub-battlefield and award points #######
     C_PAYOFF=np.zeros(3)

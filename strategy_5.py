@@ -53,7 +53,6 @@ def Strategy_5(r,Payoff_Bank, payoff_matrix, budget, strat, percent_contribution
                     community_strategy=budget[i]/(1+ratio)
                     strat[i][2]=community_strategy
                     strat[i][1]=ratio*community_strategy
-                    print(strat)
                     
             if max_contribution==percent_contribution_cat[1] and percent_contribution_cat[1]< percent_contribution_cat[0]+percent_contribution_cat[2]:
                 
@@ -62,7 +61,6 @@ def Strategy_5(r,Payoff_Bank, payoff_matrix, budget, strat, percent_contribution
                     community_strategy=budget[i]/(1+ratio)
                     strat[i][2]=community_strategy
                     strat[i][0]=ratio*community_strategy
-                    print(strat)
             
             if max_contribution==percent_contribution_cat[2] and percent_contribution_cat[2]< percent_contribution_cat[0]+percent_contribution_cat[1]:
                 
