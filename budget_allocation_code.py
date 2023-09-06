@@ -47,13 +47,17 @@ game_number=1
 
 while C[2]>0 and P[2]>0:
     ####### Players distribute resources #######
-    
-    C_strat=Strategy(C,Payoff_matrix, PAYOFF_BANK)
-    print("The Convervationalists strategy is")
-    print(C_strat)
-    P_strat=Strategy(P,Payoff_matrix, PAYOFF_BANK)
-    print("The Poachers strategy is")
-    print(P_strat)
+    keep_playing="yes"
+    while keep_playing == "yes":
+        C_strat , keep_playing = Strategy(random.randint(0, 99),C,Payoff_matrix, PAYOFF_BANK)
+        print("The Convervationalists strategy is")
+        print(C_strat)
+        
+    keep_playing="yes"    
+    while keep_playing == "yes":
+        P_strat , keep_playing = Strategy(random.randint(0,99),P,Payoff_matrix, PAYOFF_BANK)
+        print("The Poachers strategy is")
+        print(P_strat)
             #Rows are the following: Monetary, Non-Monetary, People. Columns are Player 1 and Player 2
     
     LAWS=np.array([[C_strat[0][0], P_strat[0][0]]\

@@ -2,13 +2,7 @@ import numpy as np
 import random
 from ordered_subbattlefield_contribution import Largest, Second_and_Third_Largest
 
-def Strategy_4(r,Payoff_Bank, payoff_matrix, budget, strat, percent_contribution_cat):
-    
-    strat=strat
-    budget=budget
-    r=r
-    Payoff_Bank=Payoff_Bank
-    payoff_matrix=payoff_matrix
+def Strategy_4(r,keep_playing, Payoff_Bank, payoff_matrix, budget, strat, percent_contribution_cat):
 
             
     (max_laws, max_reserves, max_community) = Largest(Payoff_Bank, payoff_matrix)
@@ -18,13 +12,25 @@ def Strategy_4(r,Payoff_Bank, payoff_matrix, budget, strat, percent_contribution
     
     ##### Strategy 4 ##### 
     if sec_max_laws==third_max_laws and sec_max_reserves==third_max_reserves:
+        keep_playing="yes"
+        print("Strategy 4 was played")
         print("Error: More than one battlefield has identical second and third sub-battlefield payoffs")
+        return strat,keep_playing
     elif sec_max_laws==third_max_laws and sec_max_community==third_max_community:
+        keep_playing="yes"
+        print("Strategy 4 was played")
         print("Error: More than one battlefield has identical second and third sub-battlefield payoffs")
+        return strat,keep_playing
     elif sec_max_reserves==third_max_reserves and sec_max_community==third_max_community:
+        keep_playing="yes"
+        print("Strategy 4 was played")
         print("Error: More than one battlefield has identical second and third sub-battlefield payoffs")
+        return strat,keep_playing
     elif sec_max_laws==max_laws or sec_max_reserves==max_reserves or sec_max_community==max_community:
-         print("Error: Second sub-battlefield has same contribution as max sub-battlefield")
+        keep_playing="yes"
+        print("Strategy 4 was played")
+        print("Error: Second sub-battlefield has same contribution as max sub-battlefield")
+        return strat,keep_playing
     else:
         for i in range(3):
             if sec_max_laws==payoff_matrix[i][0]:
@@ -738,7 +744,8 @@ def Strategy_4(r,Payoff_Bank, payoff_matrix, budget, strat, percent_contribution
                                 strat[i][j]= percent_contribution_cat[j]*budget[i] #amount of resources that go to laws
                                 strat[i][j]=percent_contribution_cat[j]*budget[i] #amount of resources that go to reserves
                                 strat[i][j]=percent_contribution_cat[j]*budget[i] # amount of resources that community
+        keep_playing="yes"
         print("Strategy 4 was played")
-        return(strat)
+        return(strat, keep_playing)
         
 

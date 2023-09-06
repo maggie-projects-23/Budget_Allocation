@@ -2,18 +2,10 @@ import numpy as np
 import random
 from ordered_subbattlefield_contribution import Largest, Second_and_Third_Largest
 
-def Strategy_8(r,Payoff_Bank, payoff_matrix, budget, strat, percent_contribution_cat):
-    
-    strat=strat
-    budget=budget
-    r=r
-    Payoff_Bank=Payoff_Bank
-    payoff_matrix=payoff_matrix
-
-            
+def Strategy_8(r, keep_playing, Payoff_Bank, payoff_matrix, budget, strat, percent_contribution_cat):  
     
     
-    ##### Strategy 8 ##### 
+    ##### Strategy 8 #####
     max_percent=max(percent_contribution_cat[0], percent_contribution_cat[1], percent_contribution_cat[2])
     if percent_contribution_cat[0]==percent_contribution_cat[1]==percent_contribution_cat[2]:
           for j in range(3):
@@ -106,8 +98,9 @@ def Strategy_8(r,Payoff_Bank, payoff_matrix, budget, strat, percent_contribution
             strat[i][sec_max_pos]=sec_strategy
             strat[i][max_pos]=ratio*sec_strategy
             
+    keep_playing='no'        
     print("Strategy 8 was played")
-    return(strat)
+    return(strat, keep_playing)
             
     
     

@@ -2,13 +2,7 @@ import numpy as np
 import random
 from ordered_subbattlefield_contribution import Largest, Second_and_Third_Largest
 
-def Strategy_2(r,Payoff_Bank, payoff_matrix, budget, strat, percent_contribution_cat):
-    
-    strat=strat
-    budget=budget
-    r=r
-    Payoff_Bank=Payoff_Bank
-    payoff_matrix=payoff_matrix
+def Strategy_2(r,keep_playing, Payoff_Bank, payoff_matrix, budget, strat, percent_contribution_cat):
 
             
     (max_laws, max_reserves, max_community) = Largest(Payoff_Bank, payoff_matrix)
@@ -19,11 +13,21 @@ def Strategy_2(r,Payoff_Bank, payoff_matrix, budget, strat, percent_contribution
     ##### Strategy 2 #####
     ### What to do if max and second max are the same
     if max_laws==sec_max_laws:
-        print("Yikes:Two sub-battlefields in Laws contain highest amount")
+        keep_playing="yes"
+        print("Strategy 2 was played")
+        print("Error:Two sub-battlefields in Laws contain highest amount")
+        return strat,keep_playing
     elif max_reserves==sec_max_reserves:
-        print("Yikes:Two sub-battlefields in Reserves contain highest amount")
+        keep_playing="yes"
+        print("Strategy 2 was played")
+        print("Error:Two sub-battlefields in Reserves contain highest amount")
+        return strat,keep_playing
     elif max_community==sec_max_community:
-        print("Yikes:Two sub-battlefields in Community contain highest amount")
+        keep_playing="yes"
+        print("Strategy 2 was played")
+        print("Error:Two sub-battlefields in Community contain highest amount")
+        return strat,keep_playing
+        
     else:             
  
         for i in range(3):
@@ -90,10 +94,9 @@ def Strategy_2(r,Payoff_Bank, payoff_matrix, budget, strat, percent_contribution
                     strat[i][j]= percent_contribution_cat[j]*budget[i] #amount of resources that go to laws
                     strat[i][j]=percent_contribution_cat[j]*budget[i] #amount of resources that go to reserves
                     strat[i][j]=percent_contribution_cat[j]*budget[i] # amount of resources that go to community
-                    
-    
 
-    print("Strategy 2 was played") 
-    return(strat)
+        keep_playing="no"
+        print("Strategy 2 was played")
+        return strat, keep_playing
 
   

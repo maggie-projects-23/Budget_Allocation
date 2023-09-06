@@ -2,7 +2,7 @@ import numpy as np
 import random
 from ordered_subbattlefield_contribution import Largest, Second_and_Third_Largest
 
-def Strategy_9(r,Payoff_Bank, payoff_matrix, budget, strat, percent_contribution_cat):
+def Strategy_9(r, keep_playing, Payoff_Bank, payoff_matrix, budget, strat, percent_contribution_cat):
     
     strat=strat
     budget=budget
@@ -37,9 +37,10 @@ def Strategy_9(r,Payoff_Bank, payoff_matrix, budget, strat, percent_contribution
         community_strategy=budget[i]/(1+ratio)
         strat[i][2]=community_strategy
         strat[i][max_pos]=ratio*community_strategy
-            
+    
+    keep_playing='no'        
     print("Strategy 8 was played")
-    return(strat)
+    return(strat, keep_playing)
             
                 
                 

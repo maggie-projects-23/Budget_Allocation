@@ -10,14 +10,14 @@ from strategy_9 import Strategy_9
 
 
 
-def Strategy(budget, payoff_matrix, Payoff_Bank):
+def Strategy(r,budget, payoff_matrix, Payoff_Bank):
     
+    keep_playing="yes"
     
     strat=np.zeros((3,3)) ####                 Laws    Reserves    Commnity 
                           #### Monetary     [                               ]
                           #### Non-Monetary [                               ]
                           #### People       [                               ]
-    r=random.randint(0,99)
     
     
     #Gives percentage (in decimal form) of how much the Laws, Reserves, and Community bettlefield contribute
@@ -32,6 +32,7 @@ def Strategy(budget, payoff_matrix, Payoff_Bank):
         for j in range(3):
             for i in range(3):
                 strat[j][i]=budget[j]/3
+        keep_playing ='no'
         print("Strategy 1 was played")
     # =============================================================================
     # =============================================================================
@@ -51,7 +52,7 @@ def Strategy(budget, payoff_matrix, Payoff_Bank):
     ## Distribute all respectuve resources evenly across all corresponding sub-battlefields
     
     if r>11 and r<=22:
-        Strategy_2(r,Payoff_Bank, payoff_matrix, budget, strat, percent_contribution_cat)
+        strat, keep_playing =Strategy_2(r,keep_playing,Payoff_Bank, payoff_matrix, budget, strat, percent_contribution_cat)
  
     # =============================================================================
     # =============================================================================
@@ -77,7 +78,7 @@ def Strategy(budget, payoff_matrix, Payoff_Bank):
     ## to the contribution each battlefield makes
    
     if r>22 and r<=33: 
-        Strategy_3(r,Payoff_Bank, payoff_matrix, budget, strat, percent_contribution_cat)
+        strat, keep_playing = Strategy_3(r, keep_playing, Payoff_Bank, payoff_matrix, budget, strat, percent_contribution_cat)
         
     # =============================================================================
     # =============================================================================
@@ -100,7 +101,7 @@ def Strategy(budget, payoff_matrix, Payoff_Bank):
     ## cannot be used
     
     if r>33 and r<=44: 
-        Strategy_4(r,Payoff_Bank, payoff_matrix, budget, strat, percent_contribution_cat)
+        strat, keep_playing = Strategy_4(r, keep_playing, Payoff_Bank, payoff_matrix, budget, strat, percent_contribution_cat)
     # =============================================================================
     # =============================================================================
     
@@ -121,7 +122,7 @@ def Strategy(budget, payoff_matrix, Payoff_Bank):
     ## If all battefields have equal weight, distribute evenly.
     
     if r>44 and r<=55: 
-        Strategy_5(r,Payoff_Bank, payoff_matrix, budget, strat, percent_contribution_cat)
+        strat, keep_playing = Strategy_5(r, keep_playing, Payoff_Bank, payoff_matrix, budget, strat, percent_contribution_cat)
     # =============================================================================
     # =============================================================================
     
@@ -138,7 +139,7 @@ def Strategy(budget, payoff_matrix, Payoff_Bank):
         for i in range(3):
             for j in range (3):
                 strat[i][j]=percent_contribution_cat[j]*budget[i]
-                
+        keep_playing ='no'        
         print("Strategy 6 was played")
     # =============================================================================
     # =============================================================================
@@ -152,7 +153,7 @@ def Strategy(budget, payoff_matrix, Payoff_Bank):
     if r>66 and r<=77: 
         for i in range(3):
             strat[i][2]=budget[i]
-                
+        keep_playing ='no'        
         print("Strategy 7 was played")
     # =============================================================================
     # =============================================================================
@@ -166,7 +167,7 @@ def Strategy(budget, payoff_matrix, Payoff_Bank):
     ## randomly choose one to be labeled as the second.
     
     if r>77 and r<=88: 
-        Strategy_8(r,Payoff_Bank, payoff_matrix, budget, strat, percent_contribution_cat)
+        strat, keep_playing = Strategy_8(r, keep_playing, Payoff_Bank, payoff_matrix, budget, strat, percent_contribution_cat)
     # =============================================================================
     # =============================================================================
     
@@ -179,7 +180,7 @@ def Strategy(budget, payoff_matrix, Payoff_Bank):
     ## randomly choose one to be labeled as the second.
     
     if r>88 and r<=99: 
-        Strategy_9(r,Payoff_Bank, payoff_matrix, budget, strat, percent_contribution_cat)
+       strat, keep_playing = Strategy_9(r, keep_playing, Payoff_Bank, payoff_matrix, budget, strat, percent_contribution_cat)
     # =============================================================================
     # =============================================================================
     
@@ -188,7 +189,7 @@ def Strategy(budget, payoff_matrix, Payoff_Bank):
     # print(r)            
     # print("The strategy matrix is")
     # print(strat)
-    return(strat)
+    return(strat, keep_playing)
         
 
 
