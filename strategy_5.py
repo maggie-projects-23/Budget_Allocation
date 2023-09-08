@@ -16,11 +16,11 @@ def Strategy_5(r,keep_playing, Payoff_Bank, payoff_matrix, budget, strat, percen
            ,third_max_laws, third_max_reserves, third_max_community) = Second_and_Third_Largest(Payoff_Bank, payoff_matrix)   
         
     
-    ##### Strategy 4 #####
+    ##### Strategy 5 #####
     max_contribution=max(percent_contribution_cat[0], percent_contribution_cat[1], percent_contribution_cat[2])
     
                  
-    ###  If teo battlefields have equal max contributions, then throw error         
+    ###  If two battlefields have equal max contributions, then throw error         
     if percent_contribution_cat[0]==percent_contribution_cat[1]==max_contribution\
         or percent_contribution_cat[0]==percent_contribution_cat[2]==max_contribution\
         or percent_contribution_cat[1]==percent_contribution_cat[2]==max_contribution:
@@ -76,7 +76,7 @@ def Strategy_5(r,keep_playing, Payoff_Bank, payoff_matrix, budget, strat, percen
                         strat[i][0]=ratio*reserves_strategy
                                    
     
-                    
+        keep_playing='no'             
         print("Strategy 5 was played")
         return(strat, keep_playing)
             

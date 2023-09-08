@@ -49,7 +49,6 @@ def Strategy_4(r,keep_playing, Payoff_Bank, payoff_matrix, budget, strat, percen
             if third_max_reserves==payoff_matrix[i][1]:
                 third_max_reserves_pos=i
                 strat[i][1]=budget[i]
-                print(strat[i][1])
             if third_max_community==payoff_matrix[i][2]:
                 third_max_community_pos=i
                 strat[i][2]=budget[i] 
@@ -627,7 +626,6 @@ def Strategy_4(r,keep_playing, Payoff_Bank, payoff_matrix, budget, strat, percen
                 if sec_max_community_pos==third_max_reserves_pos:
                     share_pos=sec_max_community_pos
                     strat[share_pos][1]=0
-                    print("hi")
                 if third_max_community_pos==third_max_reserves_pos:
                     share_pos=third_max_community_pos
                     strat[share_pos][1]=0 
@@ -744,7 +742,7 @@ def Strategy_4(r,keep_playing, Payoff_Bank, payoff_matrix, budget, strat, percen
                                 strat[i][j]= percent_contribution_cat[j]*budget[i] #amount of resources that go to laws
                                 strat[i][j]=percent_contribution_cat[j]*budget[i] #amount of resources that go to reserves
                                 strat[i][j]=percent_contribution_cat[j]*budget[i] # amount of resources that community
-        keep_playing="yes"
+        keep_playing="no"
         print("Strategy 4 was played")
         return(strat, keep_playing)
         
