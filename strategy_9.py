@@ -31,12 +31,12 @@ def Strategy_9(r, keep_playing, Payoff_Bank, payoff_matrix, budget, strat, perce
                 max_pos=1
                         
                         
-    ratio=percent_contribution_cat[max_pos]/percent_contribution_cat[2]
+        ratio=percent_contribution_cat[max_pos]/percent_contribution_cat[2]
     
-    for i in range(3):
-        community_strategy=budget[i]/(1+ratio)
-        strat[i][2]=community_strategy
-        strat[i][max_pos]=ratio*community_strategy
+        for i in range(3):
+            community_strategy=budget[i]/(1+ratio)
+            strat[i][2]=community_strategy
+            strat[i][max_pos]=ratio*community_strategy
     
     keep_playing='no'        
     print("Strategy 9 was played")

@@ -26,13 +26,13 @@ memory="no memory"
 
 ####### Initialize player's budgets and  #######
 POPULATION=100 #total people in the community/area of interest
-C_PEOPLE=round(.9*POPULATION) #how many people are influenced on by the conservationists 
-C_MONETARY=1*C_PEOPLE #Monetary budget for conservationists  Each person contributes so much to the budget.
+C_PEOPLE=round(.1*POPULATION) #how many people are influenced on by the conservationists 
+C_MONETARY=20*C_PEOPLE #Monetary budget for conservationists  Each person contributes so much to the budget.
 C_NONMONETARY=10 #Non-monetary budget for conservationists 
 
 P_PEOPLE=POPULATION-C_PEOPLE#how many people are influenced on by the poachers
 P_MONETARY=1*P_PEOPLE #Monetary budget for poachers. Each person contributes so much to the budget.
-P_NONMONETARY=200 #Non-monetary budget for poachers
+P_NONMONETARY=10 #Non-monetary budget for poachers
 
 C=[C_MONETARY, C_NONMONETARY, C_PEOPLE] #Initial budgets for Conservationists 
 P=[P_MONETARY, P_NONMONETARY, P_PEOPLE] #Initial budgets for Conservationists 
@@ -77,10 +77,10 @@ r_2 = 10 #overwritten for last game  memory and all games memory cases by uncomm
 C_final_scores_matrix=[]
 P_final_scores_matrix=[]
 
-for j in range (10,50,10):
+for j in [10,20,30,40,60,70,80,90]:
     C_final_scores_list=[]
     P_final_scores_list=[]
-    for i in range(10,50, 10): 
+    for i in [10,20,30,40,60,70,80,90]: 
         r = j #conservationists strategy
         r_2 = i #Poachers strategy
         winners, last_game_C_PAYOFF, last_game_P_PAYOFF = Budget_Allocation_Game(r,r_2, memory, POPULATION, \
@@ -130,7 +130,9 @@ plt.title("Poachers Payoff Distribtutions")
 # Removing top axes and right axes
 # ticks
 ax.get_xaxis().tick_bottom()
-ax.get_yaxis().tick_left()
+# ax.get_yaxis().tick_left()
+
+ax.set_yticklabels(['1', '2','3', '4', '6', '7', '8', '9'])
 
 #label axes
 plt.xlabel("Payoff Values")
