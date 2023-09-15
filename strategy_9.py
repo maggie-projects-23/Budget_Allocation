@@ -39,7 +39,7 @@ def Strategy_9(r, keep_playing, Payoff_Bank, payoff_matrix, budget, strat, perce
         strat[i][max_pos]=ratio*community_strategy
     
     keep_playing='no'        
-    print("Strategy 8 was played")
+    print("Strategy 9 was played")
     return(strat, keep_playing)
             
                 

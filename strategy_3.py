@@ -55,7 +55,6 @@ def Strategy_3(r, keep_playing, Payoff_Bank, payoff_matrix, budget, strat, perce
             if third_max_reserves==payoff_matrix[i][1]:
                 third_max_reserves_pos=i
                 strat[i][1]=budget[i]
-                print(strat[i][1])
             if third_max_community==payoff_matrix[i][2]:
                 third_max_community_pos=i
                 strat[i][2]=budget[i] 
