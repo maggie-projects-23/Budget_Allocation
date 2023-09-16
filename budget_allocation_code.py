@@ -9,15 +9,16 @@ def Budget_Allocation_Game(r,r_2, memory, POPULATION, C, P, PAYOFF_BANK,payoff_w
     P_PEOPLE=P[2]
     
     ######################## Playing the Game!  ########################
-    game_number=0
+    rounds_num=0
     winners="none" # gets overwritten after first game is played
     previous_strat=0
     previous_games_C=[]
     previous_payoffs_C=[]
     previous_games_P=[]
     previous_payoffs_P=[]
-    C_PAYOFF=0 # gets overwritten after first game is played
-    P_PAYOFF=0 # gets overwritten after first game is played
+    C_PAYOFF=0 # gets overwritten after first round is played
+    P_PAYOFF=0 # gets overwritten after first round is played
+    
     
     while C[2]>0 and P[2]>0:
         ####### Players distribute resources #######
@@ -25,7 +26,7 @@ def Budget_Allocation_Game(r,r_2, memory, POPULATION, C, P, PAYOFF_BANK,payoff_w
         
         while keep_playing == "yes":
             
-            r=r #90 #random.uniform(0, 99)
+            r=random.uniform(0, 99) #change to r to play a particular strat
             
             if winners != "none":
                 if memory == "no memory":
@@ -34,9 +35,9 @@ def Budget_Allocation_Game(r,r_2, memory, POPULATION, C, P, PAYOFF_BANK,payoff_w
                     # print(C_strat)
                     
                 if memory == "last game":
-                    if winners == "Conservationists ":
+                    if winners == "Conservationists":
                         adopt_previous_strat=random.uniform(0, 100)
-                        if adopt_previous_strat<(C_PAYOFF/PAYOFF_BANK):
+                        if adopt_previous_strat<(sum(C_PAYOFF)/PAYOFF_BANK):
                             print("C: previous strat was played")
                             C_strat , keep_playing = Strategy(previous_strat,C,Payoff_matrix, PAYOFF_BANK)
                             r=previous_strat
@@ -77,7 +78,7 @@ def Budget_Allocation_Game(r,r_2, memory, POPULATION, C, P, PAYOFF_BANK,payoff_w
         keep_playing="yes"    
         while keep_playing == "yes":
             
-            r_2=r_2# 90 random.uniform(0, 99)
+            r_2=random.uniform(0, 99) #change to r_2 to play a particular strat
             
             if winners != "none":
                 if memory == "no memory":
@@ -88,7 +89,7 @@ def Budget_Allocation_Game(r,r_2, memory, POPULATION, C, P, PAYOFF_BANK,payoff_w
                 if memory == "last game":
                     if winners == "Poachers":
                         adopt_previous_strat=random.uniform(0, 100)
-                        if adopt_previous_strat<(P_PAYOFF/PAYOFF_BANK):
+                        if adopt_previous_strat<(sum(P_PAYOFF)/PAYOFF_BANK):
                             print("P: previous strat was played")
                             P_strat , keep_playing = Strategy(previous_strat,P,Payoff_matrix, PAYOFF_BANK)
                             r_2=previous_strat
@@ -171,30 +172,31 @@ def Budget_Allocation_Game(r,r_2, memory, POPULATION, C, P, PAYOFF_BANK,payoff_w
         P_final_score=sum(P_PAYOFF)
         if C_final_score>P_final_score:
             print("Conservationists won the round with a payoff of ", C_final_score)
-            winners="Conservationists "
+            winners="Conservationists"
         else:
             print("Poachers won the round with a payoff of ", P_final_score)
             winners="Poachers"
-            print("The game is over with winners being", winners )
-        return(winners, C_PAYOFF, P_PAYOFF)
+        print("The round is over with winners being", winners )
         
     
-        ####### Set budgets for next game #######
-        game_number=game_number+1
-        print("The number of games played is:", game_number)
-    
+        
+    ####### Set budgets for next game #######
+        rounds_num=rounds_num+1
+        print("The number of rounds played is:", rounds_num)
+        
         if C_people_bud>0 and P_people_bud>0:
             C[2]=round(C_people_bud*POPULATION)
-            C[0]=4*C_PEOPLE
+            C[0]=1*C_PEOPLE
             P[2]=round(P_people_bud*POPULATION)
-            P[0]=6*P_PEOPLE
-            C[2]=0  # Uncomment for only one round to be played
-            P[2]=0  # Uncomment for only one round to be played
+            P[0]=10*P_PEOPLE
+            # C[2]=0  # Uncomment for only one round to be played
+            # P[2]=0  # Uncomment for only one round to be played
         else:
             C[2]=round(C_people_bud*POPULATION)
             P[2]=round(P_people_bud*POPULATION)
-    
-    
+       # return(winners, C_PAYOFF, P_PAYOFF, rounds_num) #Use when wanting to make boxplots 
+    return(winners, rounds_num)
+
     
     
     
