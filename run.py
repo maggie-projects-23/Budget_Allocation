@@ -30,13 +30,13 @@ memory="last game"
     ########computations for budget_allocation_code ########
     
 POPULATION=100 #total people in the community/area of interest
-C_PEOPLE=round(.9*POPULATION) #how many people are influenced on by the conservationists 
+C_PEOPLE=round(.1*POPULATION) #how many people are influenced on by the conservationists 
 C_MONETARY=1*C_PEOPLE #Monetary budget for conservationists  Each person contributes so much to the budget.
-C_NONMONETARY=10 #Non-monetary budget for conservationists 
+C_NONMONETARY=200 #Non-monetary budget for conservationists 
 
 P_PEOPLE=POPULATION-C_PEOPLE#how many people are influenced on by the poachers
 P_MONETARY=1*P_PEOPLE #Monetary budget for poachers. Each person contributes so much to the budget.
-P_NONMONETARY=200 #Non-monetary budget for poachers
+P_NONMONETARY=10 #Non-monetary budget for poachers
 
 C=[C_MONETARY, C_NONMONETARY, C_PEOPLE] #Initial budgets for Conservationists 
 P=[P_MONETARY, P_NONMONETARY, P_PEOPLE] #Initial budgets for Conservationists 
@@ -92,10 +92,10 @@ for i in range(10000):
 fig = plt.figure(figsize =(10, 7))
 ax = fig.add_subplot(111)
 
-bins = np.linspace(1, 25, 25)
-ax.set_xticks(range(26))
-plt.xlim([0, 25])
-plt.hist([C_wins_rounds_num, P_wins_rounds_num], bins,align='left', color=['teal', 'deeppink'], \
+bins = np.linspace(1, 45, 45)
+ax.set_xticks(range(46))
+plt.xlim([0, 45])
+plt.hist([C_wins_rounds_num, P_wins_rounds_num], bins, align='left', color=['teal', 'deeppink'], \
          label=['Conservationists', 'Poachers'])
 
 plt.legend(loc='upper right')
