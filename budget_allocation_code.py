@@ -186,7 +186,7 @@ def Budget_Allocation_Game(r,r_2, memory, POPULATION, C, P, PAYOFF_BANK,payoff_w
         
         if C_people_bud>0 and P_people_bud>0:
             C[2]=round(C_people_bud*POPULATION)
-            C[0]=1*C_PEOPLE
+            C[0]=20*C_PEOPLE
             P[2]=round(P_people_bud*POPULATION)
             P[0]=1*P_PEOPLE
             # C[2]=0  # Uncomment for only one round to be played

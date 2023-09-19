@@ -11,12 +11,12 @@ from budget_allocation_code import Budget_Allocation_Game
 ####### Decide if the players have memory of previous strategies(s) #######
 ##Uncomment which one you want ##
 
-# ### No Memory###
-# memory="no memory"
+### No Memory###
+memory="no memory"
 
 
-### Memory of last game  ###
-memory="last game"
+# ### Memory of last game  ###
+# memory="last game"
 
 
 # ### Memory of all previous games  ###
@@ -31,8 +31,8 @@ memory="last game"
     
 POPULATION=100 #total people in the community/area of interest
 C_PEOPLE=round(.1*POPULATION) #how many people are influenced on by the conservationists 
-C_MONETARY=1*C_PEOPLE #Monetary budget for conservationists  Each person contributes so much to the budget.
-C_NONMONETARY=200 #Non-monetary budget for conservationists 
+C_MONETARY=20*C_PEOPLE #Monetary budget for conservationists  Each person contributes so much to the budget.
+C_NONMONETARY=10 #Non-monetary budget for conservationists 
 
 P_PEOPLE=POPULATION-C_PEOPLE#how many people are influenced on by the poachers
 P_MONETARY=1*P_PEOPLE #Monetary budget for poachers. Each person contributes so much to the budget.
@@ -92,9 +92,22 @@ for i in range(10000):
 fig = plt.figure(figsize =(10, 7))
 ax = fig.add_subplot(111)
 
-bins = np.linspace(1, 45, 45)
-ax.set_xticks(range(46))
-plt.xlim([0, 45])
+
+plt.hist([C_wins_rounds_num, P_wins_rounds_num], align='left', color=['teal', 'deeppink'], \
+         label=['Conservationists', 'Poachers'])
+
+plt.legend(loc='upper right')
+plt.title('Distribution of Game Wins Based on the Number of Rounds in the Game')
+plt.xlabel('Number of Rounds in the Game')
+plt.ylabel('Number of Wins')
+plt.show() 
+
+fig = plt.figure(figsize =(10, 7))
+ax = fig.add_subplot(111)
+
+bins = np.linspace(1, 25, 25)
+ax.set_xticks(range(26))
+plt.xlim([0, 25])
 plt.hist([C_wins_rounds_num, P_wins_rounds_num], bins, align='left', color=['teal', 'deeppink'], \
          label=['Conservationists', 'Poachers'])
 
